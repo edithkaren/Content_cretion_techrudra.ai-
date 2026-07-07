@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<!-- Replace "YOUR NAME", contact email, and social links with your own details. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Creators — Portfolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap');
+
+  :root{
+    --bg:#F7F5FB;
+    --panel:#FFFFFF;
+    --ink:#191B29;
+    --ink-soft:#6B6E85;
+    --pink:#FF3D81;
+    --lime:#C8FF4D;
+    --border:rgba(25,27,41,0.10);
+    --border-strong:rgba(25,27,41,0.2);
+    --radius:20px;
+    --font-display:'Fraunces', serif;
+    --font-body:'Work Sans', sans-serif;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  ::selection{background:var(--pink);color:#fff;}
+  :focus-visible{outline:2px solid var(--pink);outline-offset:3px;}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  .eyebrow{
+    font-size:12.5px;letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--pink);font-weight:600;
+    display:flex;align-items:center;gap:8px;margin-bottom:16px;
+  }
+  .eyebrow::before{content:'●';font-size:8px;}
+  h1,h2,h3{font-family:var(--font-display);font-weight:600;letter-spacing:-0.01em;}
+
+  /* ---------- NAV ---------- */
+  header{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 0;transition:all .3s ease;}
+  header.scrolled{background:rgba(247,245,251,0.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:16px 0;}
+  nav{display:flex;justify-content:space-between;align-items:center;}
+  .logo{font-family:var(--font-display);font-weight:600;font-size:20px;}
+  .logo em{font-style:italic;color:var(--pink);}
+  .nav-links{display:flex;gap:32px;font-size:14.5px;font-weight:500;}
+  .nav-links a:hover{color:var(--pink);}
+  .nav-cta{font-size:13.5px;font-weight:600;border:1.5px solid var(--ink);padding:10px 20px;border-radius:100px;transition:all .2s ease;}
+  .nav-cta:hover{background:var(--ink);color:var(--bg);}
+  @media (max-width:900px){.nav-links{display:none;}}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;padding-top:130px;padding-bottom:90px;overflow:hidden;}
+  .hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:40px;align-items:center;width:100%;}
+  .hero-blob{position:absolute;top:-10%;right:-10%;width:520px;height:520px;background:radial-gradient(circle, rgba(255,61,129,0.14), transparent 65%);z-index:0;}
+
+  .hero h1{font-size:clamp(36px,5vw,60px);line-height:1.05;margin-bottom:24px;}
+  .hero h1 i{font-style:italic;color:var(--pink);}
+  .hero p{font-size:17px;color:var(--ink-soft);max-width:480px;margin-bottom:36px;}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{font-size:14px;font-weight:600;padding:15px 26px;border-radius:100px;display:inline-flex;align-items:center;gap:8px;transition:all .2s ease;}
+  .btn-primary{background:var(--ink);color:var(--bg);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(25,27,41,0.22);}
+  .btn-ghost{border:1.5px solid var(--ink);color:var(--ink);}
+  .btn-ghost:hover{background:var(--lime);border-color:var(--lime);}
+
+  /* Story-card fan (signature element) */
+  .story-stack{position:relative;height:380px;z-index:1;}
+  .story-card{
+    position:absolute;width:180px;height:250px;border-radius:18px;
+    background:var(--panel);border:1px solid var(--border);
+    box-shadow:0 20px 40px rgba(25,27,41,0.10);
+    display:flex;flex-direction:column;justify-content:flex-end;padding:18px;
+    animation:bob 5s ease-in-out infinite;
+  }
+  .story-card .tag{font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;}
+  .story-card.c1{top:10px;left:10%;transform:rotate(-9deg);background:linear-gradient(160deg,#FFE1EC,#FFFFFF);animation-delay:0s;}
+  .story-card.c2{top:60px;left:34%;transform:rotate(4deg);background:linear-gradient(160deg,#EAFFC2,#FFFFFF);z-index:2;animation-delay:1.2s;}
+  .story-card.c3{top:20px;left:58%;transform:rotate(-3deg);background:linear-gradient(160deg,#DCE4FF,#FFFFFF);animation-delay:2.4s;}
+  @keyframes bob{0%,100%{translate:0 0;}50%{translate:0 -12px;}}
+
+  /* ---------- MARQUEE ---------- */
+  .marquee-section{border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);padding:20px 0;background:var(--ink);overflow:hidden;}
+  .marquee-track{display:flex;width:max-content;gap:44px;animation:scroll-left 24s linear infinite;}
+  .marquee-section:hover .marquee-track{animation-play-state:paused;}
+  .marquee-track span{font-size:14.5px;font-weight:600;color:var(--bg);white-space:nowrap;letter-spacing:0.02em;}
+  .marquee-track span i{color:var(--lime);font-style:normal;}
+  @keyframes scroll-left{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ---------- SECTIONS ---------- */
+  section.block{padding:110px 0;}
+  .section-head{max-width:600px;margin-bottom:52px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,42px);}
+
+  /* ---------- SERVICES ---------- */
+  .bento{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:26px;transition:all .25s ease;}
+  .card:hover{border-color:var(--ink);transform:translateY(-4px);}
+  .card h3{font-size:18px;margin-bottom:10px;}
+  .card p{font-size:14px;color:var(--ink-soft);}
+  @media (min-width:900px){
+    .bento .card:nth-child(1){grid-column:span 2;}
+    .bento .card:nth-child(5){grid-column:span 2;}
+  }
+
+  /* ---------- AI SECTION ---------- */
+  .ai-section{background:var(--ink);color:var(--bg);}
+  .ai-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:center;}
+  .ai-section .eyebrow{color:var(--lime);}
+  .ai-section .eyebrow::before{color:var(--lime);}
+  .ai-copy p{color:rgba(247,245,251,0.65);font-size:15.5px;max-width:460px;margin-bottom:26px;}
+  .chip-row{display:flex;flex-wrap:wrap;gap:10px;}
+  .chip{font-size:13px;font-weight:500;border:1px solid rgba(247,245,251,0.25);padding:9px 16px;border-radius:100px;}
+  .chip.lime{background:var(--lime);color:var(--ink);border-color:var(--lime);font-weight:600;}
+  .phone-mock{
+    position:relative;height:300px;border-radius:24px;
+    background:linear-gradient(165deg,#232538,#191B29);
+    border:1px solid rgba(247,245,251,0.15);
+    padding:20px;overflow:hidden;
+  }
+  .phone-mock .bubble{background:rgba(247,245,251,0.08);border-radius:14px;padding:12px 16px;font-size:13px;margin-bottom:10px;max-width:80%;}
+  .phone-mock .bubble.right{margin-left:auto;background:var(--pink);color:#fff;}
+
+  /* ---------- INDUSTRIES / TAGS ---------- */
+  .tag-cloud{display:flex;flex-wrap:wrap;gap:12px;}
+  .tag{font-size:14px;font-weight:500;border:1.5px solid var(--ink);padding:10px 18px;border-radius:100px;transition:all .2s ease;}
+  .tag:hover{background:var(--pink);border-color:var(--pink);color:#fff;}
+
+  /* ---------- PACKAGES ---------- */
+  .packages-scroll{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
+  .pkg{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:26px 22px;display:flex;flex-direction:column;transition:all .25s ease;}
+  .pkg:hover{border-color:var(--pink);transform:translateY(-4px);}
+  .pkg .tier{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--pink);margin-bottom:14px;}
+  .pkg h3{font-size:17px;margin-bottom:10px;}
+  .pkg .for{font-size:13px;color:var(--ink-soft);margin-bottom:18px;min-height:36px;}
+  .pkg ul{margin-bottom:22px;flex-grow:1;}
+  .pkg li{font-size:13px;color:var(--ink-soft);padding-left:16px;position:relative;margin-bottom:8px;}
+  .pkg li::before{content:'✦';position:absolute;left:0;color:var(--pink);font-size:10px;top:3px;}
+  .pkg a{font-size:13px;font-weight:600;border-top:1px solid var(--border);padding-top:14px;display:flex;justify-content:space-between;}
+  .pkg a:hover{color:var(--pink);}
+  .packages-note{margin-top:26px;font-size:13.5px;color:var(--ink-soft);font-style:italic;}
+
+  /* ---------- WHAT YOU GET ---------- */
+  .get-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 40px;}
+  .get-item{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--border);}
+  .get-item p{font-size:15px;}
+
+  /* ---------- CTA / FOOTER ---------- */
+  .cta-block{text-align:center;padding:130px 0 100px;}
+  .cta-block h2{font-size:clamp(30px,4.6vw,50px);max-width:740px;margin:0 auto 24px;}
+  .cta-block p{color:var(--ink-soft);max-width:500px;margin:0 auto 36px;font-size:16px;}
+  footer{border-top:1.5px solid var(--ink);padding:36px 0;display:flex;justify-content:space-between;align-items:center;font-size:13.5px;}
+  .footer-links{display:flex;gap:22px;font-weight:500;}
+  .footer-links a:hover{color:var(--pink);}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .story-stack{height:260px;margin-top:20px;}
+    .bento{grid-template-columns:1fr 1fr;}
+    .bento .card:nth-child(1),.bento .card:nth-child(5){grid-column:span 2;}
+    .ai-grid{grid-template-columns:1fr;gap:40px;}
+    .packages-scroll{grid-template-columns:1fr 1fr;}
+    .get-grid{grid-template-columns:1fr;}
+    footer{flex-direction:column;gap:14px;text-align:center;}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 20px;}
+    .bento{grid-template-columns:1fr;}
+    .bento .card{grid-column:span 1 !important;}
+    .packages-scroll{grid-template-columns:1fr;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="wrap">
+    <nav>
+      <div class="logo">Techrudra<em>.ai</em></div>
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#ai">AI Tools</a>
+        <a href="#packages">Packages</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="#contact" class="nav-cta">Let's talk →</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-blob"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-content">
+      <div class="eyebrow">Web Design for Creators</div>
+      <h1>A site that looks<br>as good as your <i>best post</i>.</h1>
+      <p>I help content creators, influencers, and personal brands turn their audience into a professional online presence — fast, beautiful, AI-powered sites that help you stand out and get paid.</p>
+      <div class="hero-actions">
+        <a href="#packages" class="btn btn-primary">See packages</a>
+        <a href="#contact" class="btn btn-ghost">Let's talk</a>
+      </div>
+    </div>
+    <div class="story-stack">
+      <div class="story-card c1"><div class="tag">VIDEO</div></div>
+      <div class="story-card c2"><div class="tag">MEDIA KIT</div></div>
+      <div class="story-card c3"><div class="tag">STORE</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span>YouTubers <i>·</i> Intagram Creators <i>·</i> Podcasters <i>·</i> Newsletter Writers <i>·</i> Coaches <i>·</i> Streamers <i>·</i> Personal Brands <i>·</i>&nbsp;</span>
+    <span>YouTubers <i>·</i> Intagram Creators <i>·</i> Podcasters <i>·</i> Newsletter Writers <i>·</i> Coaches <i>·</i> Streamers <i>·</i> Personal Brands <i>·</i>&nbsp;</span>
+  </div>
+</div>
+
+<section class="block" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What I Build</div>
+      <h2>Services for creators</h2>
+    </div>
+    <div class="bento">
+      <div class="card"><h3>Personal Brand & Portfolio Sites</h3><p>A home base that looks as good as your best post — on your own domain.</p></div>
+      <div class="card"><h3>Premium 3D Animated Sites</h3><p>For creators who want their site to feel like content, not a template.</p></div>
+      <div class="card"><h3>Link-in-Bio & Media Kits</h3><p>One link that actually converts — stats, socials, and offers in one place.</p></div>
+      <div class="card"><h3>Merch & Online Stores</h3><p>Sell merch and digital products without giving Big Platform a cut.</p></div>
+      <div class="card"><h3>AI Fan & Community Tools</h3><p>Chat, replies, and community management that don't eat your whole day.</p></div>
+      <div class="card"><h3>Course & Membership Platforms</h3><p>Turn what you know into recurring revenue, gated and gorgeous.</p></div>
+      <div class="card"><h3>Booking & Sponsorship Pages</h3><p>Make it easy for brands and clients to book you.</p></div>
+      <div class="card"><h3>Content Automation Tools</h3><p>Repurpose, schedule, and publish — while you focus on creating.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-section" style="background:var(--panel);border-color:var(--ink);">
+  <div class="marquee-track" style="animation-direction:reverse;">
+    <span style="color:var(--ink);">Next.js <i style="color:var(--pink);">·</i> React <i style="color:var(--pink);">·</i> Node.js <i style="color:var(--pink);">·</i> TypeScript <i style="color:var(--pink);">·</i> Firebase <i style="color:var(--pink);">·</i> Supabase <i style="color:var(--pink);">·</i> Tailwind CSS <i style="color:var(--pink);">·</i> Vercel <i style="color:var(--pink);">·</i>&nbsp;</span>
+    <span style="color:var(--ink);">Next.js <i style="color:var(--pink);">·</i> React <i style="color:var(--pink);">·</i> Node.js <i style="color:var(--pink);">·</i> TypeScript <i style="color:var(--pink);">·</i> Firebase <i style="color:var(--pink);">·</i> Supabase <i style="color:var(--pink);">·</i> Tailwind CSS <i style="color:var(--pink);">·</i> Vercel <i style="color:var(--pink);">·</i>&nbsp;</span>
+  </div>
+</div>
+
+<section class="block ai-section" id="ai">
+  <div class="wrap">
+    <div class="ai-grid">
+      <div class="ai-copy">
+        <div class="eyebrow">AI-Powered Tools</div>
+        <h2 style="font-size:clamp(26px,3vw,36px);margin-bottom:18px;">Automate the parts of creating that aren't creative</h2>
+        <p>Smart replies, content generation, and workflow automation — so DMs, comments, and repurposing don't eat the hours you'd rather spend making things.</p>
+        <div class="chip-row">
+          <span class="chip lime">AI Chatbots</span>
+          <span class="chip">OpenAI</span>
+          <span class="chip">Gemini</span>
+          <span class="chip">Claude</span>
+          <span class="chip">AI Search</span>
+          <span class="chip">Content Generation</span>
+          <span class="chip">Workflow Automation</span>
+        </div>
+      </div>
+      <div class="phone-mock">
+        <div class="bubble">Do you offer a discount for annual bookings?</div>
+        <div class="bubble right">Yes! Here's the current rate + calendar →</div>
+        <div class="bubble">Amazing, sending payment now 🎉</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Perfect For</div>
+      <h2 style="font-size:clamp(26px,3vw,36px);">Who this is for</h2>
+    </div>
+    <div class="tag-cloud">
+      <span class="tag">YouTubers</span><span class="tag">Instagram Creators</span><span class="tag">TikTok Creators</span>
+      <span class="tag">Podcasters</span><span class="tag">Newsletter Writers</span><span class="tag">Coaches & Educators</span>
+      <span class="tag">Streamers</span><span class="tag">Personal Brands</span><span class="tag">Creator Agencies</span>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="packages" style="border-top:1px solid var(--border);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Ways to Work Together</div>
+      <h2>Packages</h2>
+    </div>
+    <div class="packages-scroll">
+      <div class="pkg">
+        <div class="tier">STARTER</div>
+        <h3>Starter Creator Site</h3>
+        <div class="for">For creators just getting a home base online.</div>
+        <ul><li>One-page site</li><li>Socials + media kit</li><li>Mobile-first design</li></ul>
+        <a href="https://wa.link/25g8oh"><span>Get details on Whatsapp</span><span>→</span></a>
+      </div>
+      <div class="pkg">
+        <div class="tier">BRAND</div>
+        <h3>Personal Brand Website</h3>
+        <div class="for">For creators building a real presence.</div>
+        <ul><li>Multi-page site</li><li>Blog / content hub</li><li>On-brand design system</li></ul>
+        <a href="https://wa.link/25g8oh"><span>Get details on Whatsapp</span><span>→</span></a>
+      </div>
+      <div class="pkg">
+        <div class="tier">PREMIUM 3D</div>
+        <h3>Premium 3D Portfolio</h3>
+        <div class="for">For creators who want to be remembered.</div>
+        <ul><li>GSAP / Three.js animation</li><li>Cinematic scroll</li><li>Signature visuals</li></ul>
+        <a href="https://wa.link/25g8oh"><span>Get details on Whatsapp</span><span>→</span></a>
+      </div>
+      <div class="pkg">
+        <div class="tier">AI TOOLKIT</div>
+        <h3>AI Creator Toolkit</h3>
+        <div class="for">For creators ready to automate.</div>
+        <ul><li>AI chat & replies</li><li>Content automation</li><li>Smart forms</li></ul>
+        <a href="https://wa.link/25g8oh"><span>Get details on Whatsapp</span><span>→</span></a>
+      </div>
+      <div class="pkg">
+        <div class="tier">PLATFORM</div>
+        <h3>Full Creator Platform</h3>
+        <div class="for">For creators monetizing at scale.</div>
+        <ul><li>Store + courses</li><li>Community + memberships</li><li>Payments built in</li></ul>
+        <a href="https://wa.link/25g8oh"><span>Get details on Whatsapp</span><span>→</span></a>
+      </div>
+    </div>
+    <p class="packages-note">Pricing varies by scope, features, and timeline — every project gets a custom quote.</p>
+  </div>
+</section>
+
+<section class="block" style="background:var(--panel);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">The Standard</div>
+      <h2 style="font-size:clamp(26px,3vw,36px);">What you get</h2>
+    </div>
+    <div class="get-grid">
+      <div class="get-item"><span style="color:var(--pink);font-size:18px;">✦</span><p>Modern, on-brand design</p></div>
+      <div class="get-item"><span style="color:var(--pink);font-size:18px;">✦</span><p>Mobile-first & fast-loading sites</p></div>
+      <div class="get-item"><span style="color:var(--pink);font-size:18px;">✦</span><p>AI-powered automation & fan tools</p></div>
+      <div class="get-item"><span style="color:var(--pink);font-size:18px;">✦</span><p>Premium animations & 3D experiences</p></div>
+      <div class="get-item"><span style="color:var(--pink);font-size:18px;">✦</span><p>SEO & discoverability optimization</p></div>
+      <div class="get-item"><span style="color:var(--pink);font-size:18px;">✦</span><p>Clean code & ongoing support</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-block" id="contact">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center;">Let's Build</div>
+    <h2>Helping creators build a premium presence that grows their audience and turns followers into revenue.</h2>
+    <p>Tell me a bit about you and what you're building — I'll follow up with next steps and a custom quote.</p>
+    <a href="avrakshai2604@gmail.com" class="btn btn-primary">avrakshai2604@gmail.com</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;width:100%;align-items:center;">
+    <span>© <span id="year"></span> Rudraksh Paliwal — AI Content Creator</span>
+    <div class="footer-links">
+      <a href="https://instagram.com/techrudra.ai">Instagram</a>
+      <a href="https://linkedin.com/in/rudraksh-paliwal-316b7818b">LinkedIn</a>
+      <a href="https://in.pinterest.com/avraksh2604">Pinterest</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  });
+</script>
+
+</body>
+</html>
